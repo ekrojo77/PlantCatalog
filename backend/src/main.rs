@@ -1,13 +1,18 @@
-use axum::{handler::post, Router};
+use std::net::SocketAddr;
+
 mod models;
 mod handlers;
+mod utils;
+mod api;
+mod common;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new()
-        .route("/register", post(handlers::user::register_user));
+    let app = api::routes::api_routes();
 
-    let addr = "127.0.0.1:3000".parse().unwrap();
+    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    println!("Listening on {}", addr);
+
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
