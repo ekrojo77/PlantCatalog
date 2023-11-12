@@ -1,4 +1,4 @@
-use edgedb_tokio::{Client};
+use edgedb_tokio::Client;
 use axum::http::StatusCode;
 
 pub async fn create_db_client() -> Result<Client, (StatusCode, String)> {
