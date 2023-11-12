@@ -28,7 +28,7 @@ pub async fn add_user_to_db(user: &User) -> Result<User, edgedb_tokio::Error> {
             name := <str>$0,
             email := <str>$1,
             password_hash := <str>$2
-        } RETURNING {name, email, password_hash}
+        }
     "###;
 
     client.execute(query, &(
