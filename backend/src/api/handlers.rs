@@ -6,7 +6,6 @@ pub async fn create_user_handler(Json(payload): Json<CreateUserRequest>) -> Resu
     let result = create_user(payload).await
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e))?;
     Ok(Json(UserResponse {
-        id: result.id,
         name: result.name,
         email: result.email,
     }))
