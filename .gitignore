@@ -3,3 +3,4 @@
 .git
 # Well, this depends... See below!
 Cargo.lock
+edgedb.toml
