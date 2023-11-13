@@ -1,6 +1,7 @@
 module default {
     type User {
-        required name: str{
+        required name: str;
+        required username: str {
             constraint exclusive;
         }
         required email: str {

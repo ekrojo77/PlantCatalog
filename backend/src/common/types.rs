@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize)]
 pub struct CreateUserRequest {
     pub name: String,
+    pub username: String,
     pub email: String,
     pub password: String,
 }
@@ -12,5 +13,6 @@ pub struct CreateUserRequest {
 #[derive(Serialize)]
 pub struct UserResponse {
     pub name: String,
+    pub username: String,
     pub email: String,
 }

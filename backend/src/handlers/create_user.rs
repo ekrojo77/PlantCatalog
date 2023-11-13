@@ -10,29 +10,34 @@ pub async fn create_user(request: CreateUserRequest) -> Result<UserResponse, Str
 
     let new_user = User {
         name: request.name,
+        username: request.username,
         email: request.email,
         password_hash: hashed_password,
     };
     let created_user = add_user_to_db(&new_user).await
-        .map_err(|_| ("Failed to add user to database".to_string()))?;
+        .map_err(|e| format!("Failed to add user to database: {}", e))?;
 
     Ok(UserResponse {
         name: created_user.name,
+        username: created_user.username,
         email: created_user.email,
     })
 }
 pub async fn add_user_to_db(user: &User) -> Result<User, edgedb_tokio::Error> {
     let client = create_db_client().await.unwrap();
+    println!("{:#?}",user);
     let query = r###"
         INSERT User {
             name := <str>$0,
-            email := <str>$1,
-            password_hash := <str>$2
+            username := <str>$1,
+            email := <str>$2,
+            password_hash := <str>$3
         }
     "###;
 
     client.execute(query, &(
         &user.name,
+        &user.username,
         &user.email,
         &user.password_hash,
     )).await?;

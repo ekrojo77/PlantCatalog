@@ -7,6 +7,7 @@ pub async fn create_user_handler(Json(payload): Json<CreateUserRequest>) -> Resu
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e))?;
     Ok(Json(UserResponse {
         name: result.name,
+        username: result.username,
         email: result.email,
     }))
 }
