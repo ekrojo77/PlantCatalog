@@ -25,7 +25,6 @@ pub async fn create_user(request: CreateUserRequest) -> Result<UserResponse, Str
 }
 pub async fn add_user_to_db(user: &User) -> Result<User, edgedb_tokio::Error> {
     let client = create_db_client().await.unwrap();
-    println!("{:#?}",user);
     let query = r###"
         INSERT User {
             name := <str>$0,
