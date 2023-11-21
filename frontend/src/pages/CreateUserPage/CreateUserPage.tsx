@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Button, Container } from '@mantine/core';
+import { TextInput, Button, Container, Center } from '@mantine/core';
 
 const CreateUserPage: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -29,41 +29,43 @@ const CreateUserPage: React.FC = () => {
   };
 
   return (
-    <Container>
-      <h1>Create User</h1>
-      <form onSubmit={handleCreateUser}>
-        <TextInput
-          label="Name"
-          placeholder="Enter your name"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          id="name"
-        />
-        <TextInput
-          label="Username"
-          placeholder="Enter your username"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          id="username"
-        />
-        <TextInput
-          label="Email"
-          placeholder="Enter your email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          id="email"
-        />
-        <TextInput
-          label="Password"
-          placeholder="Enter your password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          id="password"
-          type="password"
-        />
-        <Button type="submit">Submit</Button>
-      </form>
-    </Container>
+    <Center style={{ width: '100vw', height: '100vh'  }}>
+      <Container size="sm" style={{ textAlign: 'center' }}>
+        <h1>Create User</h1>
+        <form onSubmit={handleCreateUser}>
+          <TextInput
+            label="Name"
+            placeholder="Enter your name"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            id="name"
+          />
+          <TextInput
+            label="Username"
+            placeholder="Enter your username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+            id="username"
+          />
+          <TextInput
+            label="Email"
+            placeholder="Enter your email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            id="email"
+          />
+          <TextInput
+            label="Password"
+            placeholder="Enter your password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            id="password"
+            type="password"
+          />
+          <Button type="submit">Submit</Button>
+        </form>
+      </Container>
+    </Center>
   );
 };
 
