@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate  } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import { Button } from '@mantine/core';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate ();
