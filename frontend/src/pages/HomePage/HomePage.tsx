@@ -8,11 +8,18 @@ const HomePage: React.FC = () => {
   const navigateToCreateUser = () => {
     navigate('/create-user');
   };
+
+  const navigateToLogin = () => {
+    navigate('/login');
+  }
   return (
     <Center style={{ width: '100vw', height: '100vh'  }}> 
       <Container size="sm" style={{ textAlign: 'center' }}> 
         <h1>Welcome to PlantCatalog</h1>
-        <Button onClick={navigateToCreateUser}>Create User</Button>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Button onClick={navigateToCreateUser}>Create User</Button>
+          <Button onClick={navigateToLogin} style={{ marginTop: '10px' }}> Login </Button>
+        </div>
       </Container>
     </Center>
   );
