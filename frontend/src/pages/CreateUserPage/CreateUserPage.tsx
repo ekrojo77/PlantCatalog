@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextInput, Button } from '@mantine/core';
+import { TextInput, Button, Container } from '@mantine/core';
 
 const CreateUserPage: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -21,7 +21,7 @@ const CreateUserPage: React.FC = () => {
             throw new Error(`HTTP error! Status: ${response.status}`); //Improve handling
         }
 
-        const data = await response.json();
+        //const data = response
     } catch (error) {
         console.error('Error creating user:', error);
         // Improve handling
@@ -29,7 +29,7 @@ const CreateUserPage: React.FC = () => {
   };
 
   return (
-    <div>
+    <Container>
       <h1>Create User</h1>
       <form onSubmit={handleCreateUser}>
         <TextInput
@@ -63,7 +63,7 @@ const CreateUserPage: React.FC = () => {
         />
         <Button type="submit">Submit</Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
