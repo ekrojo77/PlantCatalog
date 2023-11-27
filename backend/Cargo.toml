@@ -6,9 +6,12 @@ edition = "2018"
 [dependencies]
 axum = "0.6.20"
 bcrypt = "0.15.0"
+dotenv = "0.15.0"
 edgedb-derive = "0.5.1"
 edgedb-protocol = "0.6.0"
 edgedb-tokio = "0.5.0"
+jsonwebtoken = "9.1.0"
+reqwest = { version = "0.11.22", features = ["json"]}
 serde = "1.0.189"
 serde_json = "1.0.107"
 tokio = { version= "1.33.0", features = ["full"]}
