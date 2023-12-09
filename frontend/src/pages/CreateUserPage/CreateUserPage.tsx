@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Container, Center } from '@mantine/core';
+import { PasswordStrength } from "../../components/common/PasswordStrength"
 
 const CreateUserPage: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
 
   const handleCreateUser = async () => {
     try {
+        const getPassword = () => document.querySelector<HTMLInputElement>('#password')?.value;
+        const password = getPassword();
+
         const response = await fetch('/create_user', {
             method: 'POST',
             headers: {
@@ -54,14 +57,7 @@ const CreateUserPage: React.FC = () => {
             value={email}
             id="email"
           />
-          <TextInput
-            label="Password"
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            id="password"
-            type="password"
-          />
+          <PasswordStrength/>
           <Button type="submit">Submit</Button>
         </form>
       </Container>
