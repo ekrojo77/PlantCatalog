@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate  } from 'react-router-dom';
-import { Button, Center, Container } from '@mantine/core';
+import { Flex } from '../../../styled-system/jsx';
+import { Button } from '../../components/common/button';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate ();
@@ -13,15 +14,13 @@ const HomePage: React.FC = () => {
     navigate('/login');
   }
   return (
-    <Center style={{ width: '100vw', height: '100vh'  }}> 
-      <Container size="sm" style={{ textAlign: 'center' }}> 
-        <h1>Welcome to PlantCatalog</h1>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Flex justifyContent="center" alignItems="center" style={{ width: '100vw', height: '100vh' }}> 
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}>
+          <h1>Welcome to PlantCatalog</h1>
           <Button onClick={navigateToCreateUser}>Create User</Button>
-          <Button onClick={navigateToLogin} style={{ marginTop: '10px' }}> Login </Button>
+          <Button onClick={navigateToLogin}>Login</Button>
         </div>
-      </Container>
-    </Center>
+    </Flex>
   );
 }
 
