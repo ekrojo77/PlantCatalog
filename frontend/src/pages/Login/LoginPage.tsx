@@ -12,7 +12,11 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>();
   const [loading, setLoading] = useState(false);
   const [loginError, setLoginError] = useState('');
 
@@ -26,7 +30,7 @@ const LoginPage: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       });
 
       if (!response.ok) {
@@ -44,8 +48,20 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Flex justifyContent="center" alignItems="center" style={{ height: '100vh', width: '100vw', display: 'flex' }}>
-      <form onSubmit={handleSubmit(handleLogin)} style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '300px' }}>
+    <Flex
+      justifyContent="center"
+      alignItems="center"
+      style={{ height: '100vh', width: '100vw', display: 'flex' }}
+    >
+      <form
+        onSubmit={handleSubmit(handleLogin)}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          width: '300px',
+        }}
+      >
         <label htmlFor="username">Username</label>
         <Input
           id="username"
@@ -53,7 +69,6 @@ const LoginPage: React.FC = () => {
           disabled={loading}
         />
         {errors.username && <span>{errors.username.message || 'Error'}</span>}
-
 
         <label htmlFor="password">Password</label>
         <Input
@@ -63,7 +78,6 @@ const LoginPage: React.FC = () => {
           disabled={loading}
         />
         {errors.password && <span>{errors.password.message || 'Error'}</span>}
-
 
         {loginError && <div style={{ color: 'red' }}>{loginError}</div>}
 
