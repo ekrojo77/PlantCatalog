@@ -1,26 +1,30 @@
-use std::sync::Arc;
+use jsonwebtoken::{encode, EncodingKey, Header};
+use crate::common::types::Claims;
+use crate::utils::auth::verify_password;
 
-use oauth2::{CsrfToken, basic::BasicClient, Scope};
+use super::get_users::find_user_by_username_login;
+use chrono::Utc;
 
-use crate::common::types::OAuthConfig;
 
-pub async fn construct_oauth_redirect(oauth_config: Arc<OAuthConfig>) -> Result<String, String> {
-    let client = BasicClient::new(
-        oauth_config.client_id.clone(),
-        Some(oauth_config.client_secret.clone()),
-        oauth_config.auth_url.clone(),
-        Some(oauth_config.token_url.clone())
-    )
-    .set_redirect_uri(oauth_config.redirect_url.clone());
+pub async fn login(username: &str, password: &str) -> Result<String, String> {
+    let user = find_user_by_username_login(username).await.map_err(|_e| "User not found".to_string())?;
 
-    // Generate the authorization URL
-    let (authorize_url, _csrf_state) = client
-        .authorize_url(CsrfToken::new_random)
-        .add_scope(Scope::new("openid".to_string()))
-        .add_scope(Scope::new("profile".to_string()))
-        .add_scope(Scope::new("email".to_string()))
-        // .set_pkce_challenge(pkce_challenge) // Add this if you're using PKCE
-        .url();
+    if !verify_password(password, &user.password).map_err(|_e| "Password verification failed".to_string())? {
+        return Err("Password verification failed".to_string());
+    }
+    
+    let expiration = Utc::now()
+        .checked_add_signed(chrono::Duration::hours(24))
+        .expect("valid timestamp")
+        .timestamp() as usize;
 
-    Ok(authorize_url.to_string())
+    let claims = Claims {
+        sub: user.username,
+        exp: expiration,
+    };
+
+    // Encode the JWT
+    let secret_key = std::env::var("JWT_SECRET").expect("JWT_SECRET must be set");
+    encode(&Header::default(), &claims, &EncodingKey::from_secret(secret_key.as_ref()))
+        .map_err(|_e| "JWT creation failed".to_string())
 }

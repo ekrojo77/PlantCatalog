@@ -1,7 +1,9 @@
 module default {
     type User {
-        required auth0_user_id: str;  # Store Auth0 user identifier
         required name: str;
+        required username: str;
+        required email: str;
+        required password_hash: str;
         multi plants: Plant;
     }
 
