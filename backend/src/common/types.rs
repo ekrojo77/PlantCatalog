@@ -1,4 +1,3 @@
-use oauth2::{ClientId, ClientSecret, AuthUrl, TokenUrl, RedirectUrl};
 use serde::{Deserialize, Serialize};
 
 
@@ -7,6 +6,7 @@ pub struct CreateUserRequest {
     pub name: String,
     pub username: String,
     pub email: String,
+    pub password: String,
 }
 
 // This struct might also be moved to a common location if used by multiple handlers
@@ -17,27 +17,13 @@ pub struct UserResponse {
     pub email: String,
 }
 
-pub struct OAuthConfig {
-    pub client_id: ClientId,
-    pub client_secret: ClientSecret,
-    pub auth_url: AuthUrl,
-    pub token_url: TokenUrl,
-    pub redirect_url: RedirectUrl,
-    pub audience: String,
-    pub connection: String
+#[derive(Serialize)]
+pub struct Claims {
+    pub sub: String,
+    pub exp: usize,
 }
 
-#[derive(Debug, Serialize)]
-pub struct Auth0CreateUserRequest {
-    pub email: String,
+pub struct UserPasswordResponse {
     pub username: String,
     pub password: String,
-    pub connection: String,
-    // Add other fields as needed
-}
-
-#[derive(Debug,Deserialize)]
-pub struct Auth0CreateUserResponse {
-    pub user_id: Option<String>,
-    // Add other fields as needed
 }

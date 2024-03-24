@@ -1,21 +1,17 @@
-use std::sync::Arc;
-
-
-
-use axum::response::{IntoResponse, Redirect};
-use axum::{Json, http::StatusCode, Extension};
+use axum::{Json, http::StatusCode};
 use axum::extract::Path;
 
 
-use crate::common::types::OAuthConfig;
 use crate::models::users::User;
-use crate::{handlers::create_user::create_user, handlers::get_users::find_user_by_username, handlers::authenticate::construct_oauth_redirect, common::types::UserResponse}; 
+use crate::models::login::{LoginRequest, LoginResponse};
+use crate::common::types::UserResponse;
+use crate::handlers::authenticate::login;
+use crate::{handlers::create_user::create_user, handlers::get_users::find_user_by_username}; 
 
 pub async fn create_user_handler(
-    Extension(config): Extension<Arc<OAuthConfig>>, 
     Json(payload): Json<User>
 ) -> Result<Json<UserResponse>, (StatusCode, String)> {
-    let result = create_user(config, payload).await
+    let result = create_user( payload).await
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e))?;
     
     Ok(Json(UserResponse {
@@ -31,9 +27,11 @@ pub async fn get_user_by_username_handler(Path(username): Path<String>) -> Resul
     }
 } 
 
-pub async fn login_handler(Extension(config): Extension<Arc<OAuthConfig>>, ) -> Result<impl IntoResponse, (StatusCode, String)> {
-    match construct_oauth_redirect(config).await {
-        Ok(redirect_url) => Ok(Redirect::temporary(redirect_url.as_str()).into_response()),
-        Err(e) => Err((StatusCode::INTERNAL_SERVER_ERROR, e)),
-    }
+pub async fn login_handler(
+    Json(payload): Json<LoginRequest>
+) -> Result<Json<LoginResponse>, (StatusCode, String)> {
+    let token = login(&payload.username, &payload.password).await
+        .map_err(|e| (StatusCode::UNAUTHORIZED, e))?;
+    
+    Ok(Json(LoginResponse { token }))
 }

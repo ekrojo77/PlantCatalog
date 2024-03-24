@@ -10,7 +10,4 @@ pub struct LoginRequest {
 pub struct LoginResponse {
     pub token: String,
 }
- #[derive(Serialize, Deserialize )]
-pub struct Auth0Response {
-    pub access_token: String,
-}
+
