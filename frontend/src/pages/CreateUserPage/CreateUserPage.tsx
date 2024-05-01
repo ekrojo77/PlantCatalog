@@ -11,7 +11,6 @@ import { FormLabel } from '../../components/common/form-label';
 interface FormData {
   name: string;
   username: string;
-  email: string;
   password: string;
 }
 
@@ -29,7 +28,7 @@ const CreateUserPage: React.FC = () => {
     setServerError('');
 
     try {
-      const response = await fetch('/create_user', {
+      const response = await fetch('http://localhost:3000/create_user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,23 +97,7 @@ const CreateUserPage: React.FC = () => {
             aria-invalid={errors.name ? 'true' : 'false'}
             mb="2"
           />
-          {errors.username && <span>This field is required</span>}
-
-          <FormLabel>Email</FormLabel>
-          <Input
-            id="email"
-            placeholder="Enter your email"
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value: /^\S+@\S+\.\S+$/,
-                message: 'Please enter a valid email address',
-              },
-            })}
-            aria-invalid={errors.name ? 'true' : 'false'}
-            mb="2"
-          />
-          {errors.email && <span>This field is required</span>}
+          {errors.username && <span>This field is required</span>} 
 
           <FormLabel>Password</FormLabel>
           <Input

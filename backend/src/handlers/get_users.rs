@@ -18,7 +18,6 @@ pub async fn find_user_by_username_login(username: &str) -> Result<UserPasswordR
         SELECT User {
             name,
             username,
-            email,
             password_hash
         }
         FILTER .username = <str>$0
@@ -32,7 +31,7 @@ pub async fn find_user_by_username_login(username: &str) -> Result<UserPasswordR
 
     user_option.map(|user| UserPasswordResponse{
         username: user.username,
-        password: user.password_hash
+        password: user.password
     }).ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "User not found").into())
 }
 
@@ -46,8 +45,7 @@ pub async fn find_user_by_username(username: &str) -> Result<UserResponse, Box<d
     let query = r#"
         SELECT User {
             name,
-            username,
-            email,
+            username, 
             password_hash
         }
         FILTER .username = <str>$0
@@ -62,7 +60,6 @@ pub async fn find_user_by_username(username: &str) -> Result<UserResponse, Box<d
     user_option.map(|user| UserResponse{
         username: user.username,
         name: user.name,
-        email: user.email
     }).ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "User not found").into())
 }
 
