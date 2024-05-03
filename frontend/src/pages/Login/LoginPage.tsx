@@ -8,6 +8,8 @@ import { Stack } from '../../../styled-system/jsx';
 import { Button } from '../../components/common/button';
 import { FormLabel } from '../../components/common/form-label';
 import Masthead from '../../components/common/masthead';
+import { useAuth } from '../../hooks/useAuth';
+
 
 interface LoginFormData {
   username: string;
@@ -22,6 +24,7 @@ const LoginPage: React.FC = () => {
     formState: { errors, isSubmitting},
   } = useForm<LoginFormData>();
   const [loginError, setLoginError] = useState('');
+  const { login } = useAuth();
 
   const handleLogin = async (data: LoginFormData) => {
     setLoginError('');
@@ -43,7 +46,7 @@ const LoginPage: React.FC = () => {
 
       const token = responseData.token;
 
-      localStorage.setItem('token', token);
+      login({ username: data.username, authToken: token })
 
       // Handle successful login, e.g., navigate to dashboard
       navigate('/');
