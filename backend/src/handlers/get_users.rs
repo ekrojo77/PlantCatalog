@@ -13,26 +13,35 @@ pub async fn find_user_by_username_login(username: &str) -> Result<UserPasswordR
     let mut params = HashMap::new();
     params.insert("username", username);
 
-
+    println!("Params: {:?}", params);
     let query = r#"
-        SELECT User {
-            name,
-            username,
-            password_hash
-        }
-        FILTER .username = <str>$0
+        SELECT assert_single(
+            User {
+                name,
+                username,
+                password
+            }
+            FILTER .username = <str>$0
+        )
     "#;
 
-    // Execute the query
-    let user_option: Option<User> = client.query_single(
-        query,
-        &(username,)
-    ).await?;
-
-    user_option.map(|user| UserPasswordResponse{
-        username: user.username,
-        password: user.password
-    }).ok_or_else(|| io::Error::new(io::ErrorKind::NotFound, "User not found").into())
+    match client.query_single::<User, _>(query, &(username,)).await {
+        Ok(Some(user)) => {
+            println!("User: {:?}", user);
+            Ok(UserPasswordResponse {
+                username: user.username,
+                password: user.password,
+            })
+        },
+        Ok(None) => {
+        println!("Query executed successfully, but no user found.");
+        Err(Box::new(io::Error::new(io::ErrorKind::NotFound, "User not found")))
+        },
+        Err(e) => {
+            println!("Query execution failed: {:?}", e);
+            Err(Box::new(e))
+        },
+    }
 }
 
 pub async fn find_user_by_username(username: &str) -> Result<UserResponse, Box<dyn Error>> {
@@ -46,7 +55,6 @@ pub async fn find_user_by_username(username: &str) -> Result<UserResponse, Box<d
         SELECT User {
             name,
             username, 
-            password_hash
         }
         FILTER .username = <str>$0
     "#;

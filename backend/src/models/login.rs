@@ -1,10 +1,9 @@
 use chrono::{DateTime, Utc};
-use edgedb_tokio::Queryable;
 use serde::{Deserialize, Serialize};
 
 use super::users::User;
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct LoginRequest {
     pub username: String,
     pub password: String,

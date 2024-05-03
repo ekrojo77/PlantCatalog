@@ -20,7 +20,7 @@ pub struct Claims {
     pub sub: String,
     pub exp: usize,
 }
-
+#[derive(Debug)]
 pub struct UserPasswordResponse {
     pub username: String,
     pub password: String,
