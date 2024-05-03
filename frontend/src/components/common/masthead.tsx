@@ -24,7 +24,7 @@ class Header extends React.Component {
     const { isLoggedIn } = this.state;
 
     return (
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom:'2px solid var(--dark-brown)', marginBottom: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom:'2px solid var(--dark-brown)', marginBottom: '20px', backgroundColor: "var(--secondary-green)" }}>
         {/* Logo */}
         <div>
           <img src={logo} alt="Logo" style={{ height: '50px' }} />
