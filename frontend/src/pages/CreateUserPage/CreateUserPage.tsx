@@ -5,12 +5,12 @@ import { Input } from '../../components/common/input';
 import { Flex } from '../../../styled-system/jsx/flex';
 import { Box } from '../../../styled-system/jsx/box';
 import { Heading } from '../../components/common/heading';
-import { Label } from '../../components/common/label';
+import { FormLabel } from '../../components/common/form-label';
+//import { Label } from '../../components/common/label';
 
 interface FormData {
   name: string;
   username: string;
-  email: string;
   password: string;
 }
 
@@ -28,7 +28,7 @@ const CreateUserPage: React.FC = () => {
     setServerError('');
 
     try {
-      const response = await fetch('/create_user', {
+      const response = await fetch('http://localhost:3000/create_user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const CreateUserPage: React.FC = () => {
           onSubmit={handleSubmit(handleCreateUser)}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          <Label>Name</Label>
+          <FormLabel>Name</FormLabel>
           <Input
             id="name"
             placeholder="Enter your name"
@@ -83,7 +83,7 @@ const CreateUserPage: React.FC = () => {
           />
           {errors.name && <span>This field is required</span>}
 
-          <Label>Username</Label>
+          <FormLabel>Username</FormLabel>
           <Input
             id="username"
             placeholder="Enter your username"
@@ -97,25 +97,9 @@ const CreateUserPage: React.FC = () => {
             aria-invalid={errors.name ? 'true' : 'false'}
             mb="2"
           />
-          {errors.username && <span>This field is required</span>}
+          {errors.username && <span>This field is required</span>} 
 
-          <Label>Email</Label>
-          <Input
-            id="email"
-            placeholder="Enter your email"
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value: /^\S+@\S+\.\S+$/,
-                message: 'Please enter a valid email address',
-              },
-            })}
-            aria-invalid={errors.name ? 'true' : 'false'}
-            mb="2"
-          />
-          {errors.email && <span>This field is required</span>}
-
-          <Label>Password</Label>
+          <FormLabel>Password</FormLabel>
           <Input
             id="password"
             placeholder="Enter your password"

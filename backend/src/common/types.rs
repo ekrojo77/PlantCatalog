@@ -5,7 +5,6 @@ use serde::{Deserialize, Serialize};
 pub struct CreateUserRequest {
     pub name: String,
     pub username: String,
-    pub email: String,
     pub password: String,
 }
 
@@ -14,16 +13,26 @@ pub struct CreateUserRequest {
 pub struct UserResponse {
     pub name: String,
     pub username: String,
-    pub email: String,
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Deserialize)]
 pub struct Claims {
     pub sub: String,
     pub exp: usize,
 }
-
+#[derive(Debug)]
 pub struct UserPasswordResponse {
     pub username: String,
     pub password: String,
+}
+
+#[derive(Deserialize)]
+pub struct RefreshRequest {
+    pub refresh_token: String,
+    pub username: String,
+}
+
+#[derive(Serialize)]
+pub struct TokenResponse {
+    pub token: String,
 }

@@ -2,8 +2,7 @@ module default {
     type User {
         required name: str;
         required username: str;
-        required email: str;
-        required password_hash: str;
+        required password: str;
         multi plants: Plant;
     }
 
@@ -14,5 +13,12 @@ module default {
         scientific_name: str;
         care_instructions: str;
         watering_frequency: str;
+    }
+
+    type RefreshToken {
+        required token: str;
+        required user: User;
+        required expires_at: datetime;
+        required is_revoked: bool;
     }
 }

@@ -3,14 +3,30 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--primary-green);
+  background-color: var(--light-brown);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Green tones */
+    --primary-green: #29524A;
+    --secondary-green: #94A187;
+
+    /* Earthy browns */
+    --light-brown: #A1887F;
+    --dark-brown: #5D4037;
+
+    /* Accent colors */
+    --accent-blue: #03A9F4;
+    --accent-yellow: #FFEB3B;
+    --accent-pink: #E9BCB7;
+
+    /* Background and neutrals */
+    --light-grey: #F5F5F5;
+    --off-white: #FAFAFA;
 }
 
 a {
@@ -42,7 +58,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--secondary-green);
+  color: var(--off-white);
   cursor: pointer;
   transition: border-color 0.25s;
 }
