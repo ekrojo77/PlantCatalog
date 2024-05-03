@@ -38,9 +38,15 @@ const LoginPage: React.FC = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+      
+      const responseData = await response.json();
+
+      const token = responseData.token;
+
+      localStorage.setItem('token', token);
 
       // Handle successful login, e.g., navigate to dashboard
-      navigate('/dashboard');
+      navigate('/');
     } catch (error) {
       console.error('Error Logging in:', error);
       setLoginError('Failed to login. Please check your credentials.');
