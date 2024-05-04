@@ -13,7 +13,6 @@ pub async fn find_user_by_username_login(username: &str) -> Result<UserPasswordR
     let mut params = HashMap::new();
     params.insert("username", username);
 
-    println!("Params: {:?}", params);
     let query = r#"
         SELECT assert_single(
             User {
@@ -27,15 +26,14 @@ pub async fn find_user_by_username_login(username: &str) -> Result<UserPasswordR
 
     match client.query_single::<User, _>(query, &(username,)).await {
         Ok(Some(user)) => {
-            println!("User: {:?}", user);
             Ok(UserPasswordResponse {
                 username: user.username,
                 password: user.password,
             })
         },
         Ok(None) => {
-        println!("Query executed successfully, but no user found.");
-        Err(Box::new(io::Error::new(io::ErrorKind::NotFound, "User not found")))
+            println!("Query executed successfully, but no user found.");
+            Err(Box::new(io::Error::new(io::ErrorKind::NotFound, "User not found")))
         },
         Err(e) => {
             println!("Query execution failed: {:?}", e);

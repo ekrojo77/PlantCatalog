@@ -3,10 +3,14 @@ import HomePage from './pages/HomePage/HomePage';
 import CreateUserPage from './pages/CreateUserPage/CreateUserPage';
 import LoginPage from './pages/Login/LoginPage';
 import { AuthContext } from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
 
 const App = () => {
+
+  const { user, setUser} = useAuth();
+
   return (
-    <AuthContext.Provider value={{ user: null, setUser: () => {} }}>
+    <AuthContext.Provider value={{ user, setUser}}>
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
