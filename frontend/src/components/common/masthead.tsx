@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, MenuItem } from './menu';
+import * as Menu from './menu';
 import { Button } from './button';
 import { Link } from 'react-router-dom';
 import logo from './../../assets/images/logo.png'; //just a placeholder image
@@ -28,10 +28,21 @@ const Header = () => {
       {/* Menu */}
       <div>
         {user ? (
-          <Menu>
+          /*<Menu>
             <MenuItem id="logout" onClick={handleLogout}>Log Out</MenuItem>
             <MenuItem id="myInfo">My Info</MenuItem>
-          </Menu>
+          </Menu>*/
+          <Menu.Root>
+            <Menu.Trigger>
+              <Button>Menu</Button>
+            </Menu.Trigger>
+            <Menu.Positioner>
+              <Menu.Content>
+                <Menu.Item id="logout" onClick={handleLogout}>Log Out</Menu.Item>
+                <Menu.Item id="myInfo">My Info</Menu.Item>
+              </Menu.Content>
+            </Menu.Positioner>
+          </Menu.Root>
         ) : (
           <Link to="/Login"> <Button>Log In</Button></Link>
         )}
