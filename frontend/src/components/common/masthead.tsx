@@ -28,10 +28,6 @@ const Header = () => {
       {/* Menu */}
       <div>
         {user ? (
-          /*<Menu>
-            <MenuItem id="logout" onClick={handleLogout}>Log Out</MenuItem>
-            <MenuItem id="myInfo">My Info</MenuItem>
-          </Menu>*/
           <Menu.Root>
             <Menu.Trigger>
               <Button>Menu</Button>
