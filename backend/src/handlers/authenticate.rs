@@ -1,4 +1,9 @@
-use crate::utils::auth::{generate_jwt_token, verify_password};
+use jsonwebtoken::{decode, Algorithm, DecodingKey, Validation};
+
+use std::error::Error;
+use std::io;
+
+use crate::{common::types::Claims, utils::auth::{generate_jwt_token, verify_password}};
 
 use super::get_users::find_user_by_username_login;
 
@@ -11,4 +16,21 @@ pub async fn login(username: &str, password: &str) -> Result<String, String> {
     }
     
     Ok(generate_jwt_token(username))
+}
+
+pub async fn validate_token(token: String ) -> Result<(),  Box<dyn Error>> {
+    let secret = std::env::var("JWT_SECRET")?; 
+    println!("token: {}", token);
+    let validation = Validation::new(Algorithm::HS256);
+    match decode::<Claims>(&token, &DecodingKey::from_secret(secret.as_ref()), &validation) {
+        Ok(_token_data) => {
+            // Token is valid
+            Ok(())
+        }
+        Err(err) => {
+        // Token is invalid or expired
+        Err(Box::new(io::Error::new(io::ErrorKind::NotFound, format!("Token error: {}", err))))
+        }
+    }
+
 }

@@ -2,15 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import CreateUserPage from './pages/CreateUserPage/CreateUserPage';
 import LoginPage from './pages/Login/LoginPage';
-import { AuthContext } from './context/AuthContext';
-import { useAuth } from './hooks/useAuth';
+import { AuthProvider } from './components/context/AuthContex';
 
 const App = () => {
-
-  const { user, setUser} = useAuth();
-
   return (
-    <AuthContext.Provider value={{ user, setUser}}>
+    <AuthProvider>
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -18,7 +14,7 @@ const App = () => {
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 };
 

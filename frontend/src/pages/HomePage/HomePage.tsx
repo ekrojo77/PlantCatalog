@@ -2,11 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Flex } from '../../../styled-system/jsx';
 import { Button } from '../../components/common/button';
-
 import Masthead from '../../components/common/masthead';
+import { useAuth } from '../../components/context/AuthContex';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const { user } = useAuth(); 
 
   const navigateToCreateUser = () => {
     navigate('/create-user');
@@ -15,6 +16,9 @@ const HomePage: React.FC = () => {
   const navigateToLogin = () => {
     navigate('/login');
   };
+
+  console.log("User Object: ", user)
+
   return (
     <Flex
       justifyContent="center"
@@ -30,8 +34,8 @@ const HomePage: React.FC = () => {
           gap: '10px',
         }}
       >
-        <Button onClick={navigateToCreateUser}>Create User</Button>
-        <Button onClick={navigateToLogin}>Login</Button>
+        {!user && <Button onClick={navigateToCreateUser}>Create User</Button>}
+        {!user && <Button onClick={navigateToLogin}>Login</Button>}
       </div>
     </Flex>
   );

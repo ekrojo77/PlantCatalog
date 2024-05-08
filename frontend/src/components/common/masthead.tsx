@@ -3,7 +3,7 @@ import { Menu, MenuItem } from './menu';
 import { Button } from './button';
 import { Link } from 'react-router-dom';
 import logo from './../../assets/images/logo.png'; //just a placeholder image
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../context/AuthContex';
 
 const Header = () => {
   const { user, logout } = useAuth();
@@ -11,9 +11,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-  };
-
-  console.log("User Object: ", user)
+  }
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', borderBottom:'2px solid var(--dark-brown)', marginBottom: '20px', backgroundColor: "var(--secondary-green)" }}>

@@ -1,11 +1,12 @@
 use axum::{Json, http::StatusCode};
 use axum::extract::Path;
+use serde::Deserialize;
 
 
 use crate::models::users::User;
 use crate::models::login::{LoginRequest, LoginResponse};
 use crate::common::types::UserResponse;
-use crate::handlers::authenticate::login;
+use crate::handlers::authenticate::{login, validate_token};
 
 use crate::{handlers::create_user::create_user, handlers::get_users::find_user_by_username}; 
 
@@ -35,6 +36,17 @@ pub async fn login_handler(
         .map_err(|e| (StatusCode::UNAUTHORIZED, e))?;
     
     Ok(Json(LoginResponse { token }))
+}
+#[derive(Deserialize)]
+pub struct TokenRequest {
+    pub token: String,
+}
+
+pub async fn validate_token_handler(token: Json<TokenRequest>) -> Result<StatusCode, (StatusCode, String)>{
+    match validate_token(token.0.token).await {
+        Ok(_) => Ok(StatusCode::OK),
+        Err(e) => Err((StatusCode::UNAUTHORIZED, e.to_string())),
+    }
 }
 
 /*pub async fn refresh_token_handler(Json(payload): Json<RefreshRequest>) -> Result<(StatusCode, Json<TokenResponse>), (StatusCode, String)> {

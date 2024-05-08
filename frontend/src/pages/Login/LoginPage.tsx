@@ -8,7 +8,8 @@ import { Stack } from '../../../styled-system/jsx';
 import { Button } from '../../components/common/button';
 import { FormLabel } from '../../components/common/form-label';
 import Masthead from '../../components/common/masthead';
-import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../components/context/AuthContex';
+
 
 
 interface LoginFormData {
@@ -16,7 +17,7 @@ interface LoginFormData {
   password: string;
 }
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const {
     register,
@@ -24,7 +25,7 @@ const LoginPage: React.FC = () => {
     formState: { errors, isSubmitting},
   } = useForm<LoginFormData>();
   const [loginError, setLoginError] = useState('');
-  const { login } = useAuth();
+  const { login } = useAuth() 
 
   const handleLogin = async (data: LoginFormData) => {
     setLoginError('');
@@ -44,9 +45,9 @@ const LoginPage: React.FC = () => {
       
       const responseData = await response.json();
 
-      const token = responseData.token;
+      const token: string = responseData.token;
 
-      login({ username: data.username, authToken: token })
+      login({ username: data.username, token: token });
 
       // Handle successful login, e.g., navigate to dashboard
       navigate('/');
