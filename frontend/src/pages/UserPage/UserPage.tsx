@@ -4,7 +4,7 @@ import { Flex, Box } from '../../../styled-system/jsx';
 import Masthead from '../../components/common/masthead';
 import { useAuth } from '../../components/context/AuthContext';
 import { Text } from '../../components/ui/text';
-import userImage from './../../assets/images/homepage.webp'; // Placeholder image for user page
+import userImage from './../../assets/images/homepage.webp'; 
 
 const UserPage: React.FC = () => {
   const navigate = useNavigate();
@@ -19,12 +19,12 @@ const UserPage: React.FC = () => {
   return (
     <Flex
       direction="column"
-      style={{ width: '100vw', height: '100vh', overflow: 'hidden' }} // Prevent overflow
+      style={{ width: '100vw', height: '100vh', overflow: 'hidden' }} 
     >
-      <Masthead /> {/* This is the header component we created earlier */}
+      <Masthead />
       <Flex
         direction="row"
-        style={{ flex: 1, height: 'calc(100vh - 60px)', display: 'flex' }} // Ensure proper height and display
+        style={{ flex: 1, height: 'calc(100vh - 60px)', display: 'flex' }} 
       >
         <Box style={{ flex: '0 0 30%', height: '100%', overflow: 'hidden' }}>
           <img 
@@ -41,12 +41,12 @@ const UserPage: React.FC = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            overflow: 'hidden', // Prevent inner overflow
+            overflow: 'hidden', 
           }}
         >
           <Box
             style={{
-              width: '80%', // Adjust width to prevent overflow
+              width: '80%',
               padding: '40px',
               backgroundColor: 'white',
               display: 'flex',
