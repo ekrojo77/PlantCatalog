@@ -13,12 +13,5 @@ module default {
         scientific_name: str;
         care_instructions: str;
         watering_frequency: str;
-    }
-
-    type RefreshToken {
-        required token: str;
-        required user: User;
-        required expires_at: datetime;
-        required is_revoked: bool;
-    }
+    } 
 }
