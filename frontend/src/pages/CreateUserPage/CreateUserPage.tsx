@@ -6,7 +6,7 @@ import { Flex } from '../../../styled-system/jsx/flex';
 import { Box } from '../../../styled-system/jsx/box';
 import { Heading } from '../../components/common/heading';
 import { FormLabel } from '../../components/common/form-label';
-//import { Label } from '../../components/common/label';
+import Masthead from '../../components/common/masthead';
 
 interface FormData {
   name: string;
@@ -54,6 +54,8 @@ const CreateUserPage: React.FC = () => {
   };
 
   return (
+    <div>
+   <Masthead /> 
     <Flex
       justifyContent="center"
       alignItems="center"
@@ -124,6 +126,7 @@ const CreateUserPage: React.FC = () => {
         </form>
       </Box>
     </Flex>
+    </div>
   );
 };
 
