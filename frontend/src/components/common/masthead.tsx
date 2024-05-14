@@ -2,21 +2,21 @@ import React from 'react';
 import * as Menu from '../ui/menu';
 import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
-import logo from './../../assets/images/logo.png'; 
 import { useAuth } from '../context/AuthContext';
 import { Heading } from '../ui/heading';
+import logo from './../../assets/images/logo.png'; 
 
 interface UserMenuProps {
   onLogout: () => void;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
-  const commonWidth = '150px'; 
+  const commonWidth = '200px'; 
 
   const menuStyle: React.CSSProperties = {
     backgroundColor: 'var(--primary-green)',
-    border: '2px solid var(--dark-brown)',
-    borderRadius: '5px',
+    border: '1px solid var(--dark-brown)',
+    borderRadius: '10px',
     padding: '10px 0',
     position: 'absolute',
     right: '0',
@@ -26,14 +26,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
   };
 
   const itemStyle: React.CSSProperties = {
-    padding: '10px',
+    padding: '10px 20px',
     cursor: 'pointer',
     color: 'var(--off-white)',
     textAlign: 'center',
   };
 
   const separatorStyle: React.CSSProperties = {
-    height: '2px',
+    height: '1px',
     backgroundColor: 'var(--dark-brown)',
     margin: '5px 0',
   };
@@ -41,7 +41,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
   return (
     <Menu.Root>
       <Menu.Trigger aria-label="Open user menu">
-        <Button style={{ padding: '10px', fontSize: '16px', backgroundColor: 'var(--dark-green)', color: 'var(--off-white)', width: commonWidth }}>
+        <Button style={{ padding: '10px', fontSize: '16px', backgroundColor: 'var(--primary-green)', color: 'var(--off-white)', width: 'auto' }}>
           Menu
         </Button>
       </Menu.Trigger>
@@ -62,20 +62,20 @@ const Masthead = () => {
   };
 
   return (
-    <header style={{
+    <div style={{
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '10px 20px',
       borderBottom: '2px solid var(--dark-brown)', 
-      backgroundColor: 'var(--secondary-green)'
+      backgroundColor: 'var(--secondary-green)',
     }}>
       <div style={{ padding: '10px' }}>
         <img src={logo} alt="Logo" style={{ height: '50px', borderRadius: '50%', border: '2px solid var(--dark-brown)' }} />
       </div>
 
       <div>
-        <Heading size="xl" fontWeight="bold" style={{ color: 'var(--dark-green)' }}>PlantCatalog</Heading>
+        <Heading size="xl" fontWeight="bold" style={{ color: 'var(--primary-green)' }}>PlantCatalog</Heading>
       </div>
 
       <div style={{ position: 'relative' }}>
@@ -83,12 +83,23 @@ const Masthead = () => {
           <UserMenu onLogout={handleLogout} />
         ) : (
           <Link to="/Login">
-            <Button colorPalette="var(--dark-green)" style={{ padding: '10px', fontSize: '16px', backgroundColor: 'var(--dark-green)', color: 'var(--off-white)', width: '150px' }}>Log In</Button>
+            <Button style={{
+              padding: '10px 20px',
+              fontSize: '16px',
+              backgroundColor: 'var(--primary-green)',
+              color: '#FFFFFF',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+              Log In
+            </Button>
           </Link>
         )}
       </div>
-    </header>
+    </div>
   );
 };
 
 export default Masthead;
+
