@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-types */
 import React from 'react'
-import type { TextVariantProps } from '../../../styled-system/recipes'
-import type { HTMLStyledProps } from '../../../styled-system/types'
+import type { TextVariantProps } from 'styled-system/recipes'
+import type { HTMLStyledProps } from 'styled-system/types'
 
 type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>['ref']
 

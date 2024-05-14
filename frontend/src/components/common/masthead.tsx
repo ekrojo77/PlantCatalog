@@ -1,16 +1,17 @@
 import React from 'react';
-import * as Menu from './menu';
-import { Button } from './button';
+import * as Menu from '../ui/menu';
+import { Button } from '../ui/button';
 import { Link } from 'react-router-dom';
-import logo from './../../assets/images/logo.png'; // Just a placeholder image
+import logo from './../../assets/images/logo.png'; 
 import { useAuth } from '../context/AuthContext';
+import { Heading } from '../ui/heading';
 
 interface UserMenuProps {
   onLogout: () => void;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
-  const commonWidth = '150px'; // Set the desired width
+  const commonWidth = '150px'; 
 
   const menuStyle: React.CSSProperties = {
     backgroundColor: 'var(--primary-green)',
@@ -28,7 +29,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
     padding: '10px',
     cursor: 'pointer',
     color: 'var(--off-white)',
-    textAlign: 'center', // Center align text for better visual appearance
+    textAlign: 'center',
   };
 
   const separatorStyle: React.CSSProperties = {
@@ -69,23 +70,20 @@ const Masthead = () => {
       borderBottom: '2px solid var(--dark-brown)', 
       backgroundColor: 'var(--secondary-green)'
     }}>
-      {/* Logo */}
       <div style={{ padding: '10px' }}>
         <img src={logo} alt="Logo" style={{ height: '50px', borderRadius: '50%', border: '2px solid var(--dark-brown)' }} />
       </div>
 
-      {/* Name */}
       <div>
-        <h1 style={{ fontSize: '2em', fontWeight: 'bold', color: 'var(--dark-green)' }}>PlantCatalog</h1>
+        <Heading size="xl" fontWeight="bold" style={{ color: 'var(--dark-green)' }}>PlantCatalog</Heading>
       </div>
 
-      {/* Menu */}
       <div style={{ position: 'relative' }}>
         {user ? (
           <UserMenu onLogout={handleLogout} />
         ) : (
           <Link to="/Login">
-            <Button style={{ padding: '10px', fontSize: '16px', backgroundColor: 'var(--dark-green)', color: 'var(--off-white)', width: '150px' }}>Log In</Button>
+            <Button colorPalette="var(--dark-green)" style={{ padding: '10px', fontSize: '16px', backgroundColor: 'var(--dark-green)', color: 'var(--off-white)', width: '150px' }}>Log In</Button>
           </Link>
         )}
       </div>

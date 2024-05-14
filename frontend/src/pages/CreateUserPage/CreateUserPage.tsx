@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button } from '../../components/common/button';
-import { Input } from '../../components/common/input';
-import { Flex } from '../../../styled-system/jsx/flex';
-import { Box } from '../../../styled-system/jsx/box';
-import { Heading } from '../../components/common/heading';
-import { FormLabel } from '../../components/common/form-label';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
+import { Flex } from 'styled-system/jsx/flex';
+import { Box } from 'styled-system/jsx/box';
+import { Heading } from '../../components/ui/heading';
+import { FormLabel } from '../../components/ui/form-label';
 import Masthead from '../../components/common/masthead';
 
 interface FormData {

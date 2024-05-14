@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Flex, Box } from '../../../styled-system/jsx';
-import { Text } from '../../components/common/text';
+import { Flex, Box } from 'styled-system/jsx';
+import { Text } from '../../components/ui/text';
 import Masthead from '../../components/common/masthead';
 import { useAuth } from '../../components/context/AuthContext';
 import image from './../../assets/images/homepage.webp';

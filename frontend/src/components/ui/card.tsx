@@ -1,8 +1,10 @@
+'use client'
+
 import { ark } from '@ark-ui/react/factory'
 import type { ComponentProps } from 'react'
-import { styled } from '../../../styled-system/jsx'
-import { card } from '../../../styled-system/recipes'
-import { createStyleContext } from '../../../lib/create-style-context'
+import { styled } from 'styled-system/jsx'
+import { card } from 'styled-system/recipes'
+import { createStyleContext } from '~/lib/create-style-context'
 
 const { withProvider, withContext } = createStyleContext(card)
 

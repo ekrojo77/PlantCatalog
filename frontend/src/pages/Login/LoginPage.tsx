@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { Input } from '../../components/common/input';
-import * as Card from '../../components/common/card';
-import { Flex } from '../../../styled-system/jsx';
-import { Stack } from '../../../styled-system/jsx';
-import { Button } from '../../components/common/button';
-import { FormLabel } from '../../components/common/form-label';
+import { Input } from '../../components/ui/input';
+import * as Card from '../../components/ui/card';
+import { Flex } from 'styled-system/jsx';
+import { Stack } from 'styled-system/jsx';
+import { Button } from '../../components/ui/button';
+import { FormLabel } from '../../components/ui/form-label';
 import Masthead from '../../components/common/masthead';
 import { useAuth } from '../../components/context/AuthContext';
 import { useState } from 'react';
