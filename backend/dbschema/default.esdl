@@ -9,9 +9,19 @@ module default {
     type Plant {
         required name: str;
         required description: str;
-        required image: bytes;
+        image: bytes;
         scientific_name: str;
         care_instructions: str;
         watering_frequency: str;
+        multi maintenance_records: Maintenance;
     } 
+
+    type Maintenance {
+        required timestamp: datetime;
+        watering: bool;
+        fertilization: bool;
+        fertilization_type: str;
+        image: bytes;
+        required plant: Plant;
+    }
 }
