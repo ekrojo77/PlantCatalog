@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Input } from '../../components/common/input';
@@ -9,8 +8,7 @@ import { Button } from '../../components/common/button';
 import { FormLabel } from '../../components/common/form-label';
 import Masthead from '../../components/common/masthead';
 import { useAuth } from '../../components/context/AuthContex';
-
-
+import { useState } from 'react';
 
 interface LoginFormData {
   username: string;
@@ -22,10 +20,10 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting},
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>();
   const [loginError, setLoginError] = useState('');
-  const { login } = useAuth() 
+  const { login } = useAuth();
 
   const handleLogin = async (data: LoginFormData) => {
     setLoginError('');
@@ -42,7 +40,7 @@ const LoginPage = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      
+
       const responseData = await response.json();
 
       const token: string = responseData.token;
@@ -54,61 +52,71 @@ const LoginPage = () => {
     } catch (error) {
       console.error('Error Logging in:', error);
       setLoginError('Failed to login. Please check your credentials.');
-    } 
+    }
   };
 
   return (
-    <Flex
-      justifyContent="center"
-      alignItems="center"
-      style={{ width: '100vw', height: '100vh' }}
-    >
-     <Masthead /> {/* This is the header component we created earlier */}
-      <form onSubmit={handleSubmit(handleLogin)}>
-        <Card.Root 
-          width="sm" 
-          background='#FFFFFF' 
-          alignItems="center" 
-          justifyContent="center" 
-          style={{ margin: 'auto'}}
-        >
-          <Card.Header>
-            <Card.Title>Log In</Card.Title>
-            <Card.Description>Log in to your user account.</Card.Description>
-          </Card.Header>
-          <Card.Body>
-            <Stack gap="4">
-              <Stack gap="1.5">
-                <FormLabel htmlFor="username">Username</FormLabel>
-                <Input 
-                  id="username" 
-                  placeholder="Name"
-                  {...register('username', { required: 'Username is required' })} 
-                  disabled={isSubmitting}  
-                />
-                {errors.username && <span>{errors.username.message}</span>}
+    <div style={{ width: '100vw', height: '100vh', backgroundColor: 'var(--light-grey)', display: 'flex', flexDirection: 'column' }}>
+      <Masthead />
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        style={{ flex: '1 1 auto', display: 'flex' }}
+      >
+        <form onSubmit={handleSubmit(handleLogin)} style={{ width: '100%', maxWidth: '400px', padding: '2rem' }}>
+          <Card.Root
+            width="100%"
+            background='var(--card-background)'
+            alignItems="center"
+            justifyContent="center"
+            style={{
+              margin: 'auto',
+              padding: '2rem',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              borderRadius: '10px',
+              backgroundColor: 'var(--card-background)'
+            }}
+          >
+            <Card.Header>
+              <Card.Title>Log In</Card.Title>
+              <Card.Description>Log in to your user account.</Card.Description>
+            </Card.Header>
+            <Card.Body>
+              <Stack gap="4">
+                <Stack gap="1.5">
+                  <FormLabel htmlFor="username">Username</FormLabel>
+                  <Input
+                    id="username"
+                    placeholder="Name"
+                    {...register('username', { required: 'Username is required' })}
+                    disabled={isSubmitting}
+                  />
+                  {errors.username && <span style={{ color: 'red' }}>{errors.username.message}</span>}
+                </Stack>
+                <Stack gap="1.5">
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    {...register('password', { required: 'Password is required' })}
+                    disabled={isSubmitting}
+                  />
+                  {errors.password && <span style={{ color: 'red' }}>{errors.password.message}</span>}
+                </Stack>
               </Stack>
-              <Stack gap="1.5">
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  placeholder="password"
-                  {...register('password', { required: 'Password is required' })} 
-                  disabled={isSubmitting}
-                />
-                {errors.password && <span>{errors.password.message}</span>}
-              </Stack>
-            </Stack>
-          </Card.Body>
-          <Card.Footer gap="3">
-            <Button type="submit" disabled={isSubmitting}>LogIn</Button>
-            <Button variant="outline" onClick={() => navigate('/')}>Cancel</Button> 
-          </Card.Footer>
-        </Card.Root>
-        {loginError && <div style={{ color: 'red', textAlign: 'center' }}>{loginError}</div>}
-      </form>
-    </Flex>
+            </Card.Body>
+            <Card.Footer style={{ textAlign: 'center', marginTop: '1rem' }}>
+              <Button type="submit" disabled={isSubmitting}>Log In</Button>
+              <div style={{ marginTop: '1rem' }}>
+                <a href="#" onClick={() => navigate('/create-user')}>Create User</a>
+              </div>
+            </Card.Footer>
+          </Card.Root>
+          {loginError && <div style={{ color: 'red', textAlign: 'center', marginTop: '1rem' }}>{loginError}</div>}
+        </form>
+      </Flex>
+    </div>
   );
 };
 

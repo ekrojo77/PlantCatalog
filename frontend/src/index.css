@@ -12,38 +12,38 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Green tones */
-    --primary-green: #29524A;
-    --secondary-green: #94A187;
+  --primary-green: #29524A;
+  --secondary-green: #94A187;
 
-    /* Earthy browns */
-    --light-brown: #A1887F;
-    --dark-brown: #5D4037;
+  /* Earthy browns */
+  --light-brown: #A1887F;
+  --dark-brown: #5D4037;
 
-    /* Accent colors */
-    --accent-blue: #03A9F4;
-    --accent-yellow: #FFEB3B;
-    --accent-pink: #E9BCB7;
+  /* Accent colors */
+  --accent-blue: #03A9F4;
+  --accent-yellow: #FFEB3B;
+  --accent-pink: #E9BCB7;
 
-    /* Background and neutrals */
-    --light-grey: #F5F5F5;
-    --off-white: #FAFAFA;
+  /* Background and neutrals */
+  --light-grey: #F5F5F5;
+  --off-white: #FAFAFA;
+  --card-background: #FFFFFF;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--primary-green);
+  text-decoration: none;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--secondary-green);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--light-grey);
 }
 
 h1 {
