@@ -17,8 +17,6 @@ const HomePage: React.FC = () => {
     navigate('/login');
   };
 
-  console.log("User Object: ", user)
-
   return (
     <Flex
       justifyContent="center"
