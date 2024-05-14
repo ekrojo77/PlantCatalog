@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Menu from '../ui/menu';
 import { Button } from '../ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Heading } from '../ui/heading';
 import logo from './../../assets/images/logo.png'; 
@@ -12,6 +12,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
   const commonWidth = '200px'; 
+  const navigate = useNavigate();
 
   const menuStyle: React.CSSProperties = {
     backgroundColor: 'var(--primary-green)',
@@ -46,7 +47,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout }) => {
         </Button>
       </Menu.Trigger>
       <Menu.Content style={menuStyle}>
-        <Menu.Item id="myInfo" aria-label="Go to My Info" style={itemStyle}>My Info</Menu.Item>
+        <Menu.Item 
+          id="myInfo" 
+          aria-label="Go to My Info" 
+          style={itemStyle}
+          onClick={() => navigate('/userpage')}
+          >
+          My Info
+        </Menu.Item>
         <Menu.Separator style={separatorStyle} />
         <Menu.Item id="logout" aria-label="Log Out" onClick={onLogout} style={itemStyle}>Log Out</Menu.Item>
       </Menu.Content>
