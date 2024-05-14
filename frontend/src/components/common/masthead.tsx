@@ -3,7 +3,7 @@ import * as Menu from './menu';
 import { Button } from './button';
 import { Link } from 'react-router-dom';
 import logo from './../../assets/images/logo.png'; // Just a placeholder image
-import { useAuth } from '../context/AuthContex';
+import { useAuth } from '../context/AuthContext';
 
 interface UserMenuProps {
   onLogout: () => void;
@@ -66,8 +66,7 @@ const Masthead = () => {
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '10px 20px',
-      borderBottom: '2px solid var(--dark-brown)',
-      marginBottom: '20px',
+      borderBottom: '2px solid var(--dark-brown)', 
       backgroundColor: 'var(--secondary-green)'
     }}>
       {/* Logo */}

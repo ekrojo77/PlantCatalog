@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage/HomePage';
 import CreateUserPage from './pages/CreateUserPage/CreateUserPage';
 import LoginPage from './pages/Login/LoginPage';
-import { AuthProvider } from './components/context/AuthContex';
+import { AuthProvider } from './components/context/AuthContext';
 
 const App = () => {
   return (

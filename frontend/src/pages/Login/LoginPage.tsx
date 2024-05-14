@@ -7,7 +7,7 @@ import { Stack } from '../../../styled-system/jsx';
 import { Button } from '../../components/common/button';
 import { FormLabel } from '../../components/common/form-label';
 import Masthead from '../../components/common/masthead';
-import { useAuth } from '../../components/context/AuthContex';
+import { useAuth } from '../../components/context/AuthContext';
 import { useState } from 'react';
 
 interface LoginFormData {
