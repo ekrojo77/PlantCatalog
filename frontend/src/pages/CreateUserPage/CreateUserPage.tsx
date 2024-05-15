@@ -61,7 +61,7 @@ const CreateUserPage: React.FC = () => {
       alignItems="center"
       style={{ minHeight: '100vh', width: '100vw', display: 'flex' }}
     >
-      <Box width="400px" padding="20px" style={{ margin: 'auto' }}>
+      <Box width="400px" padding="20px" style={{ margin: 'auto', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px', backgroundColor:"var(--off-white)", padding: "2rem" }}>
         <Heading as="h1" mb="4">
           Create User
         </Heading>

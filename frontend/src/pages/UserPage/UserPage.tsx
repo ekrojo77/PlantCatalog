@@ -48,7 +48,8 @@ const UserPage: React.FC = () => {
             style={{
               width: '80%',
               padding: '40px',
-              backgroundColor: 'white',
+              color: 'var(--text-color)',
+              backgroundColor: 'var(--off-white)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
