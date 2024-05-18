@@ -66,7 +66,6 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit(handleLogin)} style={{ width: '100%', maxWidth: '400px', padding: '2rem' }}>
           <Card.Root
             width="100%"
-            background='var(--card-background)'
             alignItems="center"
             justifyContent="center"
             style={{
@@ -74,7 +73,8 @@ const LoginPage = () => {
               padding: '2rem',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               borderRadius: '10px',
-              backgroundColor: 'var(--card-background)'
+              color: 'var(--text-color)',
+              backgroundColor: 'var(--off-white)',
             }}
           >
             <Card.Header>

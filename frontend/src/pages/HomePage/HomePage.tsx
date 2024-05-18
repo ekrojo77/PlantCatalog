@@ -27,13 +27,13 @@ const HomePage: React.FC = () => {
           direction="row"
           style={{ flex: 1, height: 'calc(100vh - 60px)', display: 'flex' }}
         >
-          <Box style={{ flex: '0 0 30%', height: '100%', overflow: 'hidden' }}>
+          <div style={{ flex: '0 0 30%', height: '100%', overflow: 'hidden' }}>
             <img 
               src={image} 
               alt="Plants" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
-          </Box>
+          </div>
           <Flex
             style={{
               flex: 1,
@@ -49,6 +49,7 @@ const HomePage: React.FC = () => {
               style={{
                 width: '40%', // Adjust width to prevent overflow
                 padding: '40px',
+                color: 'var(--text-color)',
                 backgroundColor: 'var(--off-white)',
                 display: 'flex',
                 flexDirection: 'column',
@@ -60,7 +61,7 @@ const HomePage: React.FC = () => {
               <Text size="2xl" fontWeight="bold">Welcome to PlantCatalog</Text>
               <Text size="lg" marginTop="10px">Your personal plant collection manager</Text>
               <Box marginTop="20px">
-                <Text fontSize="md">Track and catalog your plants easily with PlantCatalog.</Text>
+                <Text color="var(--text-color)" fontSize="md">Track and catalog your plants easily with PlantCatalog.</Text>
                 <Text fontSize="md">Enjoy features like:</Text>
                 <ul style={{ listStyleType: 'none', padding: 0, textAlign: 'left' }}>
                   <li>🌱 Detailed plant profiles</li>
