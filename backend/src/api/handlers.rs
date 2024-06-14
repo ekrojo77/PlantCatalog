@@ -5,6 +5,7 @@ use serde::Deserialize;
 use crate::common::types::UserResponse;
 use crate::handlers::authenticate::{login, validate_token};
 use crate::models::login::{LoginRequest, LoginResponse};
+use crate::models::plants::Plant;
 use crate::models::users::User;
 
 use crate::utils::auth::generate_jwt_token;
@@ -67,4 +68,14 @@ pub async fn refresh_token_handler(
         }
         Err(e) => Err((StatusCode::UNAUTHORIZED, e.to_string())),
     }
+}
+
+pub async fn add_plant_handler(
+    Json(payload): Json<Plant>,
+) -> Result<Json<Plant>, (StatusCode, String)> {
+    let result = add_plant(payload)
+        .await
+        .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e))?;
+
+    Ok(Json(result))
 }
