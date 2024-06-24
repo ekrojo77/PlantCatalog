@@ -1,2 +1,2 @@
-pub mod users;
+pub mod api;
 pub mod login;

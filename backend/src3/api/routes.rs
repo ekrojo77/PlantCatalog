@@ -3,11 +3,10 @@ use axum::{
     Router,
 };
 
-use super::controllers::{
-    auth_controller::{login_handler, validate_token_handler},
-    user_controller::{create_user_handler, get_user_by_username_handler},
+use super::handlers::{
+    create_user_handler, get_user_by_username_handler, login_handler, refresh_token_handler,
+    validate_token_handler,
 };
-
 use http::Method;
 use tower_http::cors::{Any, CorsLayer};
 
@@ -20,6 +19,7 @@ pub fn api_routes() -> Router {
         )
         .route("/login", post(login_handler))
         .route("/validate_token", post(validate_token_handler))
+        .route("/refresh_token", post(refresh_token_handler))
         .layer(
             CorsLayer::new()
                 .allow_origin(Any)

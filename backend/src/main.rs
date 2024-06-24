@@ -1,14 +1,14 @@
-use std::net::SocketAddr; 
+use dotenv::dotenv;
+use std::net::SocketAddr;
 
-mod models;
-mod handlers;
-mod utils;
 mod api;
-mod common;
+mod models;
+mod repositories;
+mod services;
+mod utils;
 
 #[tokio::main]
 async fn main() {
-
     dotenv::dotenv().ok();
 
     let app = api::routes::api_routes();

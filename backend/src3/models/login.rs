@@ -1,4 +1,7 @@
+use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+
+use super::users::User;
 
 #[derive(Deserialize, Debug)]
 pub struct LoginRequest {
@@ -12,12 +15,9 @@ pub struct LoginResponse {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
-pub struct Claims {
-    pub sub: String,
-    pub exp: usize,
-}
-
-#[derive(Deserialize)]
-pub struct TokenRequest {
-    pub token: String,
+pub struct RefreshToken{
+    token: String,
+    user: User,
+    expires_at: DateTime<Utc>,
+    is_revoked: bool,
 }
